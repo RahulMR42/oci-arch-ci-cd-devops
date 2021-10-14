@@ -18,7 +18,7 @@ resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
     deploy_artifact_source_type = var.deploy_artifact_deploy_artifact_source_deploy_artifact_source_type
 
     #Optional
-    image_uri               = "'${var.ocir_region}.ocir.io'/'${var.tenancy_name}'/'${var.deploy_artifact_display_name}':$${BUILDRUN_HASH}"
+    image_uri               = "${var.ocir_region}.ocir.io/${var.tenancy_name}/${var.deploy_artifact_display_name}:$${BUILDRUN_HASH}"
     repository_id           = oci_devops_repository.test_repository.id
   }
   deploy_artifact_type = var.deploy_artifact_deploy_artifact_type

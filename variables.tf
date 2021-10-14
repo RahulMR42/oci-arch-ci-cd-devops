@@ -45,7 +45,7 @@ variable "repository_description" {
 }
 
 variable "git_repo" {
-  default = "https://github.com/jonschreiber/oci-devops-node-express.git"  
+  default = "https://github.com/KartikShrikantHegde/oci-devops-node-express"  
 }
 
 variable "git_repo_name" {
@@ -126,6 +126,14 @@ variable "deploy_artifact_deploy_artifact_source_deploy_artifact_source_type" {
 
 variable "deploy_artifact_deploy_artifact_type" {
   default = "DOCKER_IMAGE"
+}
+
+variable "repository_repository_type" {
+  default = "HOSTED"
+}
+
+variable build_run_display_name{
+  default = "run-build"
 }
 
 # variable "build_hash_variable" {
