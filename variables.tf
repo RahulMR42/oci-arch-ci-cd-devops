@@ -140,9 +140,11 @@ variable "repository_repository_type" {
   default = "HOSTED"
 }
 
+/*
 variable build_run_display_name{
   default = "run-build"
 }
+*/
 
 # variable "build_hash_variable" {
 #   default = "${BUILDRUN_HASH}"
