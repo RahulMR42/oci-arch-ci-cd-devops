@@ -60,6 +60,10 @@ variable "build_pipeline_stage_build_pipeline_stage_type" {
   default = "BUILD"
 }
 
+variable "build_pipeline_stage_deliver_artifact_stage_type" {
+   default = "DELIVER_ARTIFACT"   
+}
+
 variable "build_pipeline_stage_build_source_collection_items_branch" {
   default = "main"
 }
@@ -69,7 +73,7 @@ variable "build_pipeline_stage_build_source_collection_items_connection_type" {
 }
 
 variable "build_pipeline_stage_build_source_collection_items_name" {
-  default = "build"
+  default = "node_express"
 }
 
 variable "build_pipeline_stage_build_spec_file" {
@@ -77,6 +81,10 @@ variable "build_pipeline_stage_build_spec_file" {
 }
 
 variable "build_pipeline_stage_deliver_artifact_collection_items_artifact_name"{
+  default = "output01"
+}
+
+variable "deliver_artifact_stage_display_name" {
   default = "deliver-artifact"
 }
 
