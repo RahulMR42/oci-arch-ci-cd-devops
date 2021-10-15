@@ -4,7 +4,7 @@
 # Create group, user and polcies for devops service
 
 resource "oci_identity_group" "devops" {
-  provider       = oci.home_region
+  provider       = oci.homeregion
   name           = "devops-group-${random_id.tag.hex}"
   description    = "group created for devops"
   compartment_id = var.tenancy_ocid
@@ -12,7 +12,7 @@ resource "oci_identity_group" "devops" {
 
 resource "oci_identity_user" "devopsuser" {
   #Required
-  provider       = oci.home_region
+  provider       = oci.homeregion
   compartment_id = var.tenancy_ocid
   description    = "user for devops"
   name           = "devops-user-${random_id.tag.hex}"
@@ -20,13 +20,13 @@ resource "oci_identity_user" "devopsuser" {
 
 resource "oci_identity_user_group_membership" "usergroupmem1" {
   # depends_on = [oci_identity_group.devops]
-  provider   = oci.home_region
-  group_id   = oci_identity_group.devops.id
-  user_id    = var.user_ocid
+  provider = oci.homeregion
+  group_id = oci_identity_group.devops.id
+  user_id  = var.user_ocid
 }
 
 resource "oci_identity_dynamic_group" "devopsgroup1" {
-  provider       = oci.home_region
+  provider       = oci.homeregion
   name           = "devopsdyngroup-${random_id.tag.hex}"
   description    = "DevOps deploy pipeline dynamic group"
   compartment_id = var.tenancy_ocid
@@ -34,7 +34,7 @@ resource "oci_identity_dynamic_group" "devopsgroup1" {
 }
 
 resource "oci_identity_dynamic_group" "devopsgroup2" {
-  provider       = oci.home_region
+  provider       = oci.homeregion
   name           = "CodeReposDynamicGroup-${random_id.tag.hex}"
   description    = "DevOps code repository dynamic group"
   compartment_id = var.tenancy_ocid
@@ -43,7 +43,7 @@ resource "oci_identity_dynamic_group" "devopsgroup2" {
 
 
 resource "oci_identity_dynamic_group" "devopsgroup3" {
-  provider       = oci.home_region
+  provider       = oci.homeregion
   name           = "MyDynamicGroup-${random_id.tag.hex}"
   description    = "DevOps repository build pipeline dynamic group"
   compartment_id = var.tenancy_ocid
@@ -52,7 +52,7 @@ resource "oci_identity_dynamic_group" "devopsgroup3" {
 
 
 resource "oci_identity_policy" "devopspolicy" {
-  provider       = oci.home_region
+  provider       = oci.homeregion
   name           = "devops-policies-${random_id.tag.hex}"
   description    = "policy created for devops"
   compartment_id = var.compartment_ocid
@@ -65,7 +65,7 @@ resource "oci_identity_policy" "devopspolicy" {
 }
 
 resource "oci_identity_policy" "devopsrootpolicy" {
-  provider       = oci.home_region
+  provider       = oci.homeregion
   name           = "devops-root-policies-${random_id.tag.hex}"
   description    = "policy created for root compartment"
   compartment_id = var.tenancy_ocid

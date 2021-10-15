@@ -1,3 +1,6 @@
+## Copyright (c) 2021, Oracle and/or its affiliates.
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
+
 resource "oci_devops_build_pipeline_stage" "test_deliver_artifact_stage" {
 
   depends_on = [oci_devops_build_pipeline_stage.test_build_pipeline_stage]
@@ -11,7 +14,7 @@ resource "oci_devops_build_pipeline_stage" "test_deliver_artifact_stage" {
       id = oci_devops_build_pipeline_stage.test_build_pipeline_stage.id
     }
   }
-  
+
   build_pipeline_stage_type = var.build_pipeline_stage_deliver_artifact_stage_type
 
   deliver_artifact_collection {
@@ -23,5 +26,5 @@ resource "oci_devops_build_pipeline_stage" "test_deliver_artifact_stage" {
       artifact_name = var.build_pipeline_stage_deliver_artifact_collection_items_artifact_name
     }
   }
-  display_name                       = var.deliver_artifact_stage_display_name
+  display_name = var.deliver_artifact_stage_display_name
 }

@@ -1,3 +1,6 @@
+## Copyright (c) 2021, Oracle and/or its affiliates.
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
+
 # Create log and log group
 
 resource "oci_logging_log_group" "test_log_group" {
@@ -52,6 +55,6 @@ resource "oci_devops_project" "test_project" {
   }
 
   #Optional
-  description  = var.project_description
+  description = var.project_description
   # defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }

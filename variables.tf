@@ -12,17 +12,13 @@ variable "region" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.1"
+  default     = "1.0"
 }
 
-variable "project_logging_config_retention_period_in_days" {
-  default = 30
+variable "app_name" {
+  default     = "DevOps"
+  description = "Application name. Will be used as prefix to identify resources, such as OKE, VCN, DevOps, and others"
 }
-
-variable "project_description" {
-  default = "DevOps CI/CD Sample Project"
-}
-
 
 variable "build_pipeline_description" {
   default = "build pipeline for Node.JS application"
@@ -45,7 +41,7 @@ variable "repository_description" {
 }
 
 variable "git_repo" {
-  default = "https://github.com/KartikShrikantHegde/oci-devops-node-express"  
+  default = "https://github.com/KartikShrikantHegde/oci-devops-node-express"
 }
 
 variable "git_repo_name" {
@@ -61,7 +57,7 @@ variable "build_pipeline_stage_build_pipeline_stage_type" {
 }
 
 variable "build_pipeline_stage_deliver_artifact_stage_type" {
-   default = "DELIVER_ARTIFACT"   
+  default = "DELIVER_ARTIFACT"
 }
 
 variable "build_pipeline_stage_deploy_stage_type" {
@@ -84,11 +80,11 @@ variable "build_pipeline_stage_build_spec_file" {
   default = ""
 }
 
-variable "build_pipeline_stage_deliver_artifact_collection_items_artifact_name"{
+variable "build_pipeline_stage_deliver_artifact_collection_items_artifact_name" {
   default = "output01"
 }
 
-variable build_pipeline_stage_display_name {
+variable "build_pipeline_stage_display_name" {
   default = "nodejs-build-pipeline"
 }
 
@@ -96,7 +92,7 @@ variable "deliver_artifact_stage_display_name" {
   default = "deliver-artifact"
 }
 
-variable deploy_stage_display_name {
+variable "deploy_stage_display_name" {
   default = "deploy-artifact"
 }
 
@@ -117,7 +113,7 @@ variable "build_pipeline_stage_stage_execution_timeout_in_seconds" {
 }
 
 variable "registry_display_name" {
-  default = "node-express-getting-starter"
+  default = "node-express-getting-starter2"
 }
 
 variable "container_repository_is_public" {
@@ -128,11 +124,11 @@ variable "deploy_artifact_argument_substitution_mode" {
   default = "NONE"
 }
 
-variable "deploy_artifact_display_name"{
+variable "deploy_artifact_display_name" {
   default = "node-express-getting-starter"
 }
 
-variable "ocir_region"{
+variable "ocir_region" {
   default = "iad"
 }
 
