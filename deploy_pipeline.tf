@@ -1,7 +1,6 @@
-/*
 resource "oci_devops_deploy_environment" "test_environment" {
-  display_name            = "test_oke_env"
-  description             = "test oke based enviroment"
+  display_name            = "oke_environment_${random_id.tag.hex}"
+  description             = "oke based enviroment"
   deploy_environment_type = "OKE_CLUSTER"
   project_id              = oci_devops_project.test_project.id
   cluster_id              = var.create_new_oke_cluster ? oci_containerengine_cluster.oke_cluster[0].id : var.existent_oke_cluster_id
@@ -60,4 +59,3 @@ resource "oci_devops_deploy_stage" "test_deploy_stage" {
   oke_cluster_deploy_environment_id       = oci_devops_deploy_environment.test_environment.id
   defined_tags                            = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
-*/

@@ -28,18 +28,6 @@ resource "oci_devops_build_pipeline_stage" "test_build_pipeline_stage" {
   }
 
   build_spec_file = var.build_pipeline_stage_build_spec_file
-
-/*
-  deliver_artifact_collection {
-
-    #Optional
-    items {
-      #Optional
-      artifact_id   = oci_devops_deploy_artifact.test_deploy_artifact.id
-      artifact_name = var.build_pipeline_stage_deliver_artifact_collection_items_artifact_name
-    }
-  }
-  */
   
   display_name                       = var.build_pipeline_stage_display_name
   image                              = var.build_pipeline_stage_image
