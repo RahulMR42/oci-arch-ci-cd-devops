@@ -64,6 +64,10 @@ variable "build_pipeline_stage_deliver_artifact_stage_type" {
    default = "DELIVER_ARTIFACT"   
 }
 
+variable "build_pipeline_stage_deploy_stage_type" {
+  default = "TRIGGER_DEPLOYMENT_PIPELINE"
+}
+
 variable "build_pipeline_stage_build_source_collection_items_branch" {
   default = "main"
 }
@@ -84,12 +88,16 @@ variable "build_pipeline_stage_deliver_artifact_collection_items_artifact_name"{
   default = "output01"
 }
 
+variable build_pipeline_stage_display_name {
+  default = "nodejs-build-pipeline"
+}
+
 variable "deliver_artifact_stage_display_name" {
   default = "deliver-artifact"
 }
 
-variable build_pipeline_stage_display_name{
-  default = "nodejs-build-pipeline"
+variable deploy_stage_display_name {
+  default = "deploy-artifact"
 }
 
 variable "build_pipeline_stage_image" {

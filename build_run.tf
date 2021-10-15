@@ -1,6 +1,7 @@
 resource "oci_devops_build_run" "test_build_run" {
 
-  depends_on = [oci_devops_build_pipeline_stage.test_build_pipeline_stage, oci_devops_build_pipeline_stage.test_deliver_artifact_stage, oci_devops_build_pipeline_stage.test_deploy_stage]
+  depends_on = [oci_devops_build_pipeline_stage.test_build_pipeline_stage, oci_devops_build_pipeline_stage.test_deliver_artifact_stage]
+  # depends_on = [oci_devops_build_pipeline_stage.test_deploy_stage]
 
   #Required
   build_pipeline_id = oci_devops_build_pipeline.test_build_pipeline.id
