@@ -12,7 +12,7 @@ resource "oci_devops_deploy_environment" "test_environment" {
 }
 
 #  Add var to choose between an existing Articat and an inline one
-
+/*
 resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
   argument_substitution_mode = var.argument_substitution_mode
   deploy_artifact_type       = var.deploy_artifact_type
@@ -24,7 +24,7 @@ resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
   }
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
-
+*/
 resource "oci_devops_deploy_pipeline" "test_deploy_pipeline" {
   #Required
   project_id   = oci_devops_project.test_project.id
