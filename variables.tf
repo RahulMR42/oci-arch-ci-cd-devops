@@ -14,7 +14,7 @@ variable "app_name" {
   description = "Application name. Will be used as prefix to identify resources, such as OKE, VCN, DevOps, and others"
 }
 
-variable "oci_user_name" {}
+# variable "oci_user_name" {}
 variable "oci_user_authtoken" {}
 
 variable "release" {

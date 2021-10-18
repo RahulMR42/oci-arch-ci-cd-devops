@@ -40,11 +40,16 @@ resource "null_resource" "clonerepo" {
 
 }
 
-#resource "null_resource" "clonefromgithub" {
-#  provisioner "local-exec" {
-#    command = "git clone ${var.git_repo}"
-#  }
-#}
+resource "null_resource" "clonefromgithub" {
+ 
+ provisioner "local-exec" {
+   command = "rm -rf ./${var.git_repo_name}"
+ }
+
+ provisioner "local-exec" {
+   command = "git clone ${var.git_repo}"
+ }
+}
 
 
 resource "null_resource" "copyfiles" {

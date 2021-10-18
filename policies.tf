@@ -3,6 +3,7 @@
 
 # Create group, user and polcies for devops service
 
+/*
 resource "oci_identity_group" "devops" {
   provider       = oci.home_region
   name           = "devops-group-${random_id.tag.hex}"
@@ -17,14 +18,15 @@ resource "oci_identity_user" "devopsuser" {
   description    = "user for devops"
   name           = "devops-user-${random_id.tag.hex}"
 }
+*/
 
-resource "oci_identity_user_group_membership" "usergroupmem1" {
-  # depends_on = [oci_identity_group.devops]
-  provider = oci.home_region
-  group_id = oci_identity_group.devops.id
-  #  user_id    = var.user_ocid
-  user_id = oci_identity_user.devopsuser.id
-}
+# resource "oci_identity_user_group_membership" "usergroupmem1" {
+#   # depends_on = [oci_identity_group.devops]
+#   provider = oci.home_region
+#   group_id = oci_identity_group.devops.id
+#   #  user_id    = var.user_ocid
+#   user_id = oci_identity_user.devopsuser.id
+# }
 
 
 resource "oci_identity_dynamic_group" "devopsgroup1" {
@@ -60,8 +62,8 @@ resource "oci_identity_policy" "devopspolicy" {
   compartment_id = var.compartment_ocid
 
   statements = [
-    "Allow group ${oci_identity_group.devops.name} to manage devops-family in compartment id ${var.compartment_ocid}",
-    "Allow group ${oci_identity_group.devops.name} to manage all-artifacts in compartment id ${var.compartment_ocid}",
+    "Allow group Administrators to manage devops-family in compartment id ${var.compartment_ocid}",
+    "Allow group Administrators to manage all-artifacts in compartment id ${var.compartment_ocid}",
     "Allow dynamic-group ${oci_identity_dynamic_group.devopsgroup1.name} to manage all-resources in compartment id ${var.compartment_ocid}",
   ]
 }
