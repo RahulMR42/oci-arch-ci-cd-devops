@@ -9,10 +9,17 @@ variable "fingerprint" {}
 variable "private_key_path" {}
 variable "region" {}
 
+variable "app_name" {
+  default     = "DevOps"
+  description = "Application name. Will be used as prefix to identify resources, such as OKE, VCN, DevOps, and others"
+}
+
+variable "oci_user_name" {}
+variable "oci_user_authtoken" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.1"
+  default     = "1.0"
 }
 
 variable "project_logging_config_retention_period_in_days" {
@@ -45,7 +52,7 @@ variable "repository_description" {
 }
 
 variable "git_repo" {
-  default = "https://github.com/KartikShrikantHegde/oci-devops-node-express"  
+  default = "https://github.com/KartikShrikantHegde/oci-devops-node-express"
 }
 
 variable "git_repo_name" {
@@ -61,7 +68,7 @@ variable "build_pipeline_stage_build_pipeline_stage_type" {
 }
 
 variable "build_pipeline_stage_deliver_artifact_stage_type" {
-   default = "DELIVER_ARTIFACT"   
+  default = "DELIVER_ARTIFACT"
 }
 
 variable "build_pipeline_stage_deploy_stage_type" {
@@ -84,11 +91,11 @@ variable "build_pipeline_stage_build_spec_file" {
   default = ""
 }
 
-variable "build_pipeline_stage_deliver_artifact_collection_items_artifact_name"{
+variable "build_pipeline_stage_deliver_artifact_collection_items_artifact_name" {
   default = "output01"
 }
 
-variable build_pipeline_stage_display_name {
+variable "build_pipeline_stage_display_name" {
   default = "nodejs-build-pipeline"
 }
 
@@ -96,7 +103,7 @@ variable "deliver_artifact_stage_display_name" {
   default = "deliver-artifact"
 }
 
-variable deploy_stage_display_name {
+variable "deploy_stage_display_name" {
   default = "deploy-artifact"
 }
 
@@ -125,14 +132,14 @@ variable "container_repository_is_public" {
 }
 
 variable "deploy_artifact_argument_substitution_mode" {
-  default = "NONE"
+  default = "SUBSTITUTE_PLACEHOLDERS"
 }
 
-variable "deploy_artifact_display_name"{
+variable "deploy_artifact_display_name" {
   default = "node-express-getting-starter"
 }
 
-variable "ocir_region"{
+variable "ocir_region" {
   default = "iad"
 }
 
@@ -148,14 +155,44 @@ variable "repository_repository_type" {
   default = "HOSTED"
 }
 
-/*
-variable build_run_display_name{
-  default = "run-build"
+variable "deploy_artifact_type" {
+  default = "KUBERNETES_MANIFEST"
 }
-*/
 
-# variable "build_hash_variable" {
-#   default = "${BUILDRUN_HASH}"
-# }
+variable "deploy_pipeline_description" {
+  default = "Devops CI/CD Pipleline demo for OKE"
+}
+
+variable "deploy_artifact_source_type" {
+  default = "INLINE"
+}
+
+variable "deploy_pipeline_deploy_pipeline_parameters_items_default_value" {
+  default = "example"
+}
+
+variable "deploy_pipeline_deploy_pipeline_parameters_items_description" {
+  default = "exampleapp"
+}
+
+variable "deploy_pipeline_deploy_pipeline_parameters_items_name" {
+  default = "namespace"
+}
+
+variable "deploy_stage_deploy_stage_type" {
+  default = "OKE_DEPLOYMENT"
+}
+
+variable "deploy_stage_description" {
+  default = "ci/cd deployment to OKE"
+}
+
+variable "execute_deployment" {
+  default = true
+}
+
+variable "build_pipeline_stage_is_pass_all_parameters_enabled" {
+  default = true
+}
 
 

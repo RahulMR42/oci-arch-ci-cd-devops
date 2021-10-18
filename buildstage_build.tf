@@ -1,3 +1,6 @@
+## Copyright © 2021, Oracle and/or its affiliates. 
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
+
 resource "oci_devops_build_pipeline_stage" "test_build_pipeline_stage" {
   #Required
   build_pipeline_id = oci_devops_build_pipeline.test_build_pipeline.id
@@ -19,7 +22,7 @@ resource "oci_devops_build_pipeline_stage" "test_build_pipeline_stage" {
       connection_type = var.build_pipeline_stage_build_source_collection_items_connection_type
 
       #Optional
-      branch         = var.build_pipeline_stage_build_source_collection_items_branch
+      branch = var.build_pipeline_stage_build_source_collection_items_branch
       # connection_id  = oci_devops_connection.test_connection.id
       name           = var.build_pipeline_stage_build_source_collection_items_name
       repository_id  = oci_devops_repository.test_repository.id
@@ -28,7 +31,7 @@ resource "oci_devops_build_pipeline_stage" "test_build_pipeline_stage" {
   }
 
   build_spec_file = var.build_pipeline_stage_build_spec_file
-  
+
   display_name                       = var.build_pipeline_stage_display_name
   image                              = var.build_pipeline_stage_image
   stage_execution_timeout_in_seconds = var.build_pipeline_stage_stage_execution_timeout_in_seconds
