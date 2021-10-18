@@ -9,16 +9,27 @@ variable "fingerprint" {}
 variable "private_key_path" {}
 variable "region" {}
 
+variable "app_name" {
+  default     = "DevOps"
+  description = "Application name. Will be used as prefix to identify resources, such as OKE, VCN, DevOps, and others"
+}
+
+variable "oci_user_name" {}
+variable "oci_user_authtoken" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
   default     = "1.0"
 }
 
-variable "app_name" {
-  default     = "DevOps"
-  description = "Application name. Will be used as prefix to identify resources, such as OKE, VCN, DevOps, and others"
+variable "project_logging_config_retention_period_in_days" {
+  default = 30
 }
+
+variable "project_description" {
+  default = "DevOps CI/CD Sample Project"
+}
+
 
 variable "build_pipeline_description" {
   default = "build pipeline for Node.JS application"
@@ -113,7 +124,7 @@ variable "build_pipeline_stage_stage_execution_timeout_in_seconds" {
 }
 
 variable "registry_display_name" {
-  default = "node-express-getting-starter2"
+  default = "node-express-getting-starter"
 }
 
 variable "container_repository_is_public" {
@@ -121,7 +132,7 @@ variable "container_repository_is_public" {
 }
 
 variable "deploy_artifact_argument_substitution_mode" {
-  default = "NONE"
+  default = "SUBSTITUTE_PLACEHOLDERS"
 }
 
 variable "deploy_artifact_display_name" {
@@ -144,14 +155,44 @@ variable "repository_repository_type" {
   default = "HOSTED"
 }
 
-/*
-variable build_run_display_name{
-  default = "run-build"
+variable "deploy_artifact_type" {
+  default = "KUBERNETES_MANIFEST"
 }
-*/
 
-# variable "build_hash_variable" {
-#   default = "${BUILDRUN_HASH}"
-# }
+variable "deploy_pipeline_description" {
+  default = "Devops CI/CD Pipleline demo for OKE"
+}
+
+variable "deploy_artifact_source_type" {
+  default = "INLINE"
+}
+
+variable "deploy_pipeline_deploy_pipeline_parameters_items_default_value" {
+  default = "example"
+}
+
+variable "deploy_pipeline_deploy_pipeline_parameters_items_description" {
+  default = "exampleapp"
+}
+
+variable "deploy_pipeline_deploy_pipeline_parameters_items_name" {
+  default = "namespace"
+}
+
+variable "deploy_stage_deploy_stage_type" {
+  default = "OKE_DEPLOYMENT"
+}
+
+variable "deploy_stage_description" {
+  default = "ci/cd deployment to OKE"
+}
+
+variable "execute_deployment" {
+  default = true
+}
+
+variable "build_pipeline_stage_is_pass_all_parameters_enabled" {
+  default = true
+}
 
 

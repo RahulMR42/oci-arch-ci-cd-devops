@@ -8,7 +8,7 @@ resource "oci_identity_dynamic_group" "oke_nodes_dg" {
   compartment_id = var.tenancy_ocid
   matching_rule  = "ANY {ALL {instance.compartment.id = '${local.oke_compartment_id}'},ALL {resource.type = 'cluster', resource.compartment.id = '${local.oke_compartment_id}'}}"
 
-  provider = oci.homeregion
+  provider = oci.home_region
 
   count = var.create_dynamic_group_for_nodes_in_compartment ? 1 : 0
 }
@@ -20,7 +20,7 @@ resource "oci_identity_policy" "oke_compartment_policies" {
 
   depends_on = [oci_identity_dynamic_group.oke_nodes_dg]
 
-  provider = oci.homeregion
+  provider = oci.home_region
 
   count = var.create_compartment_policies ? 1 : 0
 }
@@ -32,7 +32,7 @@ resource "oci_identity_policy" "kms_compartment_policies" {
 
   depends_on = [oci_identity_dynamic_group.oke_nodes_dg]
 
-  provider = oci.homeregion
+  provider = oci.home_region
 
   count = (var.create_compartment_policies && var.create_vault_policies_for_group) ? 1 : 0
 }
@@ -45,7 +45,7 @@ resource "oci_identity_policy" "oke_tenancy_policies" {
 
   depends_on = [oci_identity_dynamic_group.oke_nodes_dg]
 
-  provider = oci.homeregion
+  provider = oci.home_region
 
   count = var.create_tenancy_policies ? 1 : 0
 }
