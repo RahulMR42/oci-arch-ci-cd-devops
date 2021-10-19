@@ -22,7 +22,7 @@ resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
 
     #Optional
     image_uri     = "${var.ocir_region}.ocir.io/${var.tenancy_name}/${var.deploy_artifact_display_name}:$${BUILDRUN_HASH}"
-    image_digest  = "sha256:eeec3879b0c3ed8e4ad6c5427208bfb29e602f01ac57aa7a809e336d42df8f44"
+    # image_digest  = "sha256:eeec3879b0c3ed8e4ad6c5427208bfb29e602f01ac57aa7a809e336d42df8f44"
     repository_id = oci_devops_repository.test_repository.id
   }
 

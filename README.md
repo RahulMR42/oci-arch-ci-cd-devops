@@ -57,6 +57,7 @@ tenancy_ocid         = "<tenancy_ocid>"
 user_ocid            = "<user_ocid>"
 fingerprint          = "<finger_print>"
 private_key_path     = "<pem_private_key_path>"
+tenancy_name           = "<oci_tenancy_name>"
 
 # Region
 region = "<oci_region>"
