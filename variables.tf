@@ -2,7 +2,6 @@
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 variable "tenancy_ocid" {}
-variable "tenancy_name" {}
 variable "compartment_ocid" {}
 variable "user_ocid" {}
 variable "fingerprint" {}
@@ -52,11 +51,11 @@ variable "repository_description" {
 }
 
 variable "git_repo" {
-  default = "https://github.com/KartikShrikantHegde/oci-devops-node-express"
+  default = "https://github.com/oracle-quickstart/oci-devops-node.git"
 }
 
 variable "git_repo_name" {
-  default = "oci-devops-node-express"
+  default = "oci-devops-node"
 }
 
 variable "build_pipeline_stage_build_pipeline_stage_predecessor_collection_items_id" {
@@ -139,9 +138,15 @@ variable "deploy_artifact_display_name" {
   default = "node-express-getting-starter"
 }
 
-variable "ocir_region" {
-  default = "iad"
+locals {
+  ocir_docker_repository = join("", [lower(lookup(data.oci_identity_regions.home_region.regions[0], "key")), ".ocir.io"])
+  #ocir_namespace = lookup(data.oci_identity_tenancy.oci_tenancy, "name" )
+  ocir_namespace = lookup(data.oci_objectstorage_namespace.ns, "namespace")
 }
+
+
+#variable "ocir_region" {
+ # default = "iad"}
 
 variable "deploy_artifact_deploy_artifact_source_deploy_artifact_source_type" {
   default = "OCIR"

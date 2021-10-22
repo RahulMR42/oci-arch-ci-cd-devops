@@ -26,7 +26,7 @@ resource "oci_devops_build_pipeline_stage" "test_build_pipeline_stage" {
       # connection_id  = oci_devops_connection.test_connection.id
       name           = var.build_pipeline_stage_build_source_collection_items_name
       repository_id  = oci_devops_repository.test_repository.id
-      repository_url = "https://devops.scmservice.us-ashburn-1.oci.oraclecloud.com/namespaces/${var.tenancy_name}/projects/${oci_devops_project.test_project.name}/repositories/${oci_devops_repository.test_repository.name}"
+      repository_url = "https://devops.scmservice.${var.region}.oci.oraclecloud.com/namespaces/${local.ocir_namespace}/projects/${oci_devops_project.test_project.name}/repositories/${oci_devops_repository.test_repository.name}"
     }
   }
 

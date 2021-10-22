@@ -19,7 +19,7 @@ resource "oci_devops_deploy_artifact" "test_deploy_oke_artifact" {
 
   deploy_artifact_source {
     deploy_artifact_source_type = var.deploy_artifact_source_type #INLINE,GENERIC_ARTIFACT_OCIR
-    base64encoded_content       = file("${path.module}/manifest/gettingstarted-manifest.yaml")
+    base64encoded_content       = templatefile("${path.module}/manifest/gettingstarted-manifest.yaml", { region = "${local.ocir_docker_repository}", name = "${local.ocir_namespace}", image = "${var.deploy_artifact_display_name}", hash = "$${BUILDRUN_HASH}", namespace = "$${namespace}" })
   }
 }
 
@@ -44,7 +44,7 @@ resource "oci_devops_deploy_stage" "test_deploy_stage" {
   deploy_stage_predecessor_collection {
     #Required
     items {
-      #Required - firt statge has the predecessor ID as pipeline ID
+      #Required
       id = oci_devops_deploy_pipeline.test_deploy_pipeline.id
     }
   }
@@ -55,7 +55,6 @@ resource "oci_devops_deploy_stage" "test_deploy_stage" {
   display_name = "deploy_to_OKE_${random_id.tag.hex}"
 
   kubernetes_manifest_deploy_artifact_ids = [oci_devops_deploy_artifact.test_deploy_oke_artifact.id]
-  #namespace                               = var.deploy_stage_namespace
   oke_cluster_deploy_environment_id = oci_devops_deploy_environment.test_environment.id
 }
 

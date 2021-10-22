@@ -15,3 +15,7 @@ resource "oci_devops_build_run" "test_build_run_1" {
   #Optional
   display_name = "build_run_${random_id.tag.hex}"
 }
+
+# output "build_digest_output" {
+#   value = oci_devops_build_run.test_build_run.build_outputs[0].delivered_artifacts[0].items[0].delivered_artifact_hash
+# }

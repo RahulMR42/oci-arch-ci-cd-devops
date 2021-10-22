@@ -12,8 +12,6 @@ resource "oci_artifacts_container_repository" "test_container_repository" {
 
 resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
 
-  #depends_on = [oci_devops_project.test_project, oci_devops_repository.test_repository]
-
   #Required
   argument_substitution_mode = var.deploy_artifact_argument_substitution_mode
   deploy_artifact_source {
@@ -21,8 +19,9 @@ resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
     deploy_artifact_source_type = var.deploy_artifact_deploy_artifact_source_deploy_artifact_source_type
 
     #Optional
-    image_uri     = "${var.ocir_region}.ocir.io/${var.tenancy_name}/${var.deploy_artifact_display_name}:$${BUILDRUN_HASH}"
+    image_uri     = "${local.ocir_docker_repository}/${local.ocir_namespace}/${var.deploy_artifact_display_name}:$${BUILDRUN_HASH}"
     image_digest  = " "
+    #image_digest  = oci_devops_build_run.test_build_run.build_outputs[0].delivered_artifacts[0].items[0].delivered_artifact_hash
     repository_id = oci_devops_repository.test_repository.id
   }
 

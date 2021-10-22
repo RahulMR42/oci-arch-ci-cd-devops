@@ -23,7 +23,7 @@ resource "null_resource" "clonerepo" {
   }
 
   provisioner "local-exec" {
-    command = "echo '(2) Repo to clone: https://devops.scmservice.${var.region}.oci.oraclecloud.com/namespaces/${var.tenancy_name}/projects/${oci_devops_project.test_project.name}/repositories/${oci_devops_repository.test_repository.name}'"
+    command = "echo '(2) Repo to clone: https://devops.scmservice.${var.region}.oci.oraclecloud.com/namespaces/${local.ocir_namespace}/projects/${oci_devops_project.test_project.name}/repositories/${oci_devops_repository.test_repository.name}'"
   }
 
   provisioner "local-exec" {
@@ -31,7 +31,7 @@ resource "null_resource" "clonerepo" {
   }
 
   provisioner "local-exec" {
-    command = "echo '(4) Starting git clone command... '; current_dir=$(PWD); export GIT_ASKPASS=$current_dir/git-askpass-helper.sh; export GIT_PASSWORD=${var.oci_user_authtoken} ; git clone https://devops.scmservice.${var.region}.oci.oraclecloud.com/namespaces/${var.tenancy_name}/projects/${oci_devops_project.test_project.name}/repositories/${oci_devops_repository.test_repository.name}"
+    command = "echo '(4) Starting git clone command... '; current_dir=$(PWD); export GIT_ASKPASS=$current_dir/git-askpass-helper.sh; export GIT_PASSWORD=${var.oci_user_authtoken} ; git clone https://devops.scmservice.${var.region}.oci.oraclecloud.com/namespaces/${local.ocir_namespace}/projects/${oci_devops_project.test_project.name}/repositories/${oci_devops_repository.test_repository.name}"
   }
 
   provisioner "local-exec" {

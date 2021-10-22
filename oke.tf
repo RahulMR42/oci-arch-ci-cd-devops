@@ -31,6 +31,44 @@ module "oci-oke" {
   availability_domain                                                         = data.oci_identity_availability_domains.ADs.availability_domains[0]["name"]
 }
 
+
+resource "oci_identity_compartment" "oke_compartment" {
+  compartment_id = var.compartment_ocid
+  name           = "oke-compartment-${random_string.deploy_id.result}"
+  description    = "${var.oke_compartment_description} (Deployment ${random_string.deploy_id.result})"
+  enable_delete  = true
+
+  count = var.create_new_compartment_for_oke ? 1 : 0
+}
+locals {
+  #oke_compartment_id = var.create_new_compartment_for_oke ? oci_identity_compartment.oke_compartment.0.id : var.compartment_id
+  oke_compartment_id = var.compartment_ocid
+}
+
+# Local kubeconfig for when using Terraform locally. Not used by Oracle Resource Manager
+resource "local_file" "kubeconfig" {
+  content  = data.oci_containerengine_cluster_kube_config.oke_cluster_kube_config.content
+  filename = "generated/kubeconfig"
+}
+
+# Generate ssh keys to access Worker Nodes, if generate_public_ssh_key=true, applies to the pool
+resource "tls_private_key" "oke_worker_node_ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
+}
+
+# Get OKE options
+locals {
+  cluster_k8s_latest_version   = reverse(sort(data.oci_containerengine_cluster_option.oke.kubernetes_versions))[0]
+  node_pool_k8s_latest_version = reverse(sort(data.oci_containerengine_node_pool_option.oke.kubernetes_versions))[0]
+}
+
+# Checks if is using Flexible Compute Shapes
+locals {
+  is_flexible_node_shape = contains(local.compute_flexible_shapes, var.node_pool_shape)
+}
+
+
 /*
 resource "oci_containerengine_cluster" "oke_cluster" {
   compartment_id     = local.oke_compartment_id
@@ -105,39 +143,3 @@ resource "oci_containerengine_node_pool" "oke_node_pool" {
 }
 
 */
-
-resource "oci_identity_compartment" "oke_compartment" {
-  compartment_id = var.compartment_ocid
-  name           = "oke-compartment-${random_string.deploy_id.result}"
-  description    = "${var.oke_compartment_description} (Deployment ${random_string.deploy_id.result})"
-  enable_delete  = true
-
-  count = var.create_new_compartment_for_oke ? 1 : 0
-}
-locals {
-  #oke_compartment_id = var.create_new_compartment_for_oke ? oci_identity_compartment.oke_compartment.0.id : var.compartment_id
-  oke_compartment_id = var.compartment_ocid
-}
-
-# Local kubeconfig for when using Terraform locally. Not used by Oracle Resource Manager
-resource "local_file" "kubeconfig" {
-  content  = data.oci_containerengine_cluster_kube_config.oke_cluster_kube_config.content
-  filename = "generated/kubeconfig"
-}
-
-# Generate ssh keys to access Worker Nodes, if generate_public_ssh_key=true, applies to the pool
-resource "tls_private_key" "oke_worker_node_ssh_key" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
-
-# Get OKE options
-locals {
-  cluster_k8s_latest_version   = reverse(sort(data.oci_containerengine_cluster_option.oke.kubernetes_versions))[0]
-  node_pool_k8s_latest_version = reverse(sort(data.oci_containerengine_node_pool_option.oke.kubernetes_versions))[0]
-}
-
-# Checks if is using Flexible Compute Shapes
-locals {
-  is_flexible_node_shape = contains(local.compute_flexible_shapes, var.node_pool_shape)
-}
