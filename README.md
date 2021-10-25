@@ -58,6 +58,12 @@ Deploy:
     terraform plan
     terraform apply
 
+
+## Access the application
+You can go to created OKE cluster, click on `Access Cluster`, launch `Cloud Shell`, run `kubeconfig` create command in cloud shell. Next, run the below command.
+
+`kubectl -n example get services` - where `example` is the namespace for the cluster. You should be able to copy the `EXTERNAL-IP` and paste it on the browser to access the Node.JS application.
+
 ## Destroy the Deployment
 When you no longer need the deployment, you can run this command to destroy it:
 
