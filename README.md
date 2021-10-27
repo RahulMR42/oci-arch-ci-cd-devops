@@ -1,10 +1,11 @@
 # oci-arch-ci-cd-devops
 
-Rapid delivery of software is essential for efficiently running your applications in the cloud. Oracle DevOps service provides a continuous integration and deployment (CI/CD) platform for developers. You can use the DevOps service to easily build, test, and deploy software and applications on Oracle Cloud. The service also provides a private Git repositories to store your code and supports connections to external code repositories.
+Rapid delivery of software is essential for efficiently running your applications in the cloud. Oracle Cloud Infrastructure (OCI) DevOps services provide a continuous integration and deployment (CI/CD) platform for developers to easily build, test, and deploy software and applications on Oracle Cloud.
 
-In this reference architecture, you will build and test a sample Node.js web application and then deploy it to OKE by using the OCI DevOps service. The application source code is hosted on a DevOps code repository. The end user commits the code into the code repository, which triggers the start of a build pipeline.
+This reference architecture builds and tests a sample Node.js web application and then deploys it to OKE by using the OCI DevOps. The application source code is hosted on a DevOps code repository. The end user commits the code into the code repository, which triggers the start of a build pipeline.
 
 The build pipeline follows a user-defined flow to build and test software, then create a container image of the latest version of the application. The output of the build is stored in the container registry as an image. Then a deployment pipeline uses the built image from the container registry and a Kubernetes manifest to deploy the most recent version of the application to OKE.
+
 
 For details of the architecture, see [Build a continuous integration and deployment pipeline using Oracle DevOps service](https://docs.oracle.com/en/solutions/ci-cd-pipe-oci-devops/index.html)
 
