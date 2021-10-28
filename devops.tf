@@ -6,6 +6,7 @@
 resource "oci_logging_log_group" "test_log_group" {
   compartment_id = var.compartment_ocid
   display_name   = "devops_log_group_${random_string.deploy_id.result}"
+  defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_logging_log" "test_log" {
@@ -31,6 +32,7 @@ resource "oci_logging_log" "test_log" {
 
   is_enabled         = true
   retention_duration = var.project_logging_config_retention_period_in_days
+  defined_tags       = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 # Create OCI Notification
@@ -38,6 +40,7 @@ resource "oci_logging_log" "test_log" {
 resource "oci_ons_notification_topic" "test_notification_topic" {
   compartment_id = var.compartment_ocid
   name           = "${random_string.deploy_id.result}_devopstopic"
+  defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 # Create devops project
@@ -52,5 +55,6 @@ resource "oci_devops_project" "test_project" {
   }
 
   #Optional
-  description = var.project_description
+  description  = var.project_description
+  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
