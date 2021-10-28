@@ -2,12 +2,12 @@
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 resource "oci_devops_deploy_environment" "test_environment" {
-
   display_name            = "oke_environment_${random_id.tag.hex}"
   description             = "oke based enviroment"
   deploy_environment_type = "OKE_CLUSTER"
   project_id              = oci_devops_project.test_project.id
   cluster_id              = module.oci-oke[0].cluster.id
+  defined_tags            = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 #  Add var to choose between an existing Articat and an inline one
@@ -21,6 +21,7 @@ resource "oci_devops_deploy_artifact" "test_deploy_oke_artifact" {
     deploy_artifact_source_type = var.deploy_artifact_source_type #INLINE,GENERIC_ARTIFACT_OCIR
     base64encoded_content       = templatefile("${path.module}/manifest/gettingstarted-manifest.yaml", { region = "${local.ocir_docker_repository}", name = "${local.ocir_namespace}", image = "${var.deploy_artifact_display_name}", hash = "$${BUILDRUN_HASH}", namespace = "$${namespace}" })
   }
+  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_devops_deploy_pipeline" "test_deploy_pipeline" {
@@ -36,6 +37,7 @@ resource "oci_devops_deploy_pipeline" "test_deploy_pipeline" {
       description   = var.deploy_pipeline_deploy_pipeline_parameters_items_description
     }
   }
+  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_devops_deploy_stage" "test_deploy_stage" {
@@ -55,7 +57,8 @@ resource "oci_devops_deploy_stage" "test_deploy_stage" {
   display_name = "deploy_to_OKE_${random_id.tag.hex}"
 
   kubernetes_manifest_deploy_artifact_ids = [oci_devops_deploy_artifact.test_deploy_oke_artifact.id]
-  oke_cluster_deploy_environment_id = oci_devops_deploy_environment.test_environment.id
+  oke_cluster_deploy_environment_id       = oci_devops_deploy_environment.test_environment.id
+  defined_tags                            = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 /*

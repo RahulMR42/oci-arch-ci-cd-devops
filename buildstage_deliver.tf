@@ -27,4 +27,6 @@ resource "oci_devops_build_pipeline_stage" "test_deliver_artifact_stage" {
     }
   }
   display_name = var.deliver_artifact_stage_display_name
+  defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+
 }
