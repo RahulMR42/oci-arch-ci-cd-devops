@@ -18,7 +18,7 @@ variable "oci_user_authtoken" {}
 
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
-  default     = "1.0.1"
+  default     = "1.0.2"
 }
 
 variable "project_logging_config_retention_period_in_days" {
@@ -122,9 +122,11 @@ variable "build_pipeline_stage_stage_execution_timeout_in_seconds" {
   default = 36000
 }
 
+/*
 variable "registry_display_name" {
   default = "node-express-getting-starter"
 }
+*/
 
 variable "container_repository_is_public" {
   default = true
@@ -134,9 +136,11 @@ variable "deploy_artifact_argument_substitution_mode" {
   default = "SUBSTITUTE_PLACEHOLDERS"
 }
 
+/*
 variable "deploy_artifact_display_name" {
   default = "node-express-getting-starter"
 }
+*/
 
 locals {
   ocir_docker_repository = join("", [lower(lookup(data.oci_identity_regions.current_region.regions[0], "key")), ".ocir.io"])

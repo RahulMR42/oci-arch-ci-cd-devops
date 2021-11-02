@@ -19,7 +19,7 @@ resource "oci_devops_deploy_artifact" "test_deploy_oke_artifact" {
 
   deploy_artifact_source {
     deploy_artifact_source_type = var.deploy_artifact_source_type #INLINE,GENERIC_ARTIFACT_OCIR
-    base64encoded_content       = templatefile("${path.module}/manifest/gettingstarted-manifest.yaml", { region = "${local.ocir_docker_repository}", name = "${local.ocir_namespace}", image = "${var.deploy_artifact_display_name}", hash = "$${BUILDRUN_HASH}", namespace = "$${namespace}" })
+    base64encoded_content       = templatefile("${path.module}/manifest/gettingstarted-manifest.yaml", { region = "${local.ocir_docker_repository}", name = "${local.ocir_namespace}", image = "${oci_artifacts_container_repository.test_container_repository.display_name}", hash = "$${BUILDRUN_HASH}", namespace = "$${namespace}" })
   }
   defined_tags = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
