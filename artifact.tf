@@ -4,8 +4,7 @@
 resource "oci_artifacts_container_repository" "test_container_repository" {
   #Required
   compartment_id = var.compartment_ocid
-  display_name   = var.registry_display_name
-
+  display_name   = "node-express-getting-starter_${random_id.tag.hex}"
   #Optional
   is_public = var.container_repository_is_public
 }
@@ -19,7 +18,7 @@ resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
     deploy_artifact_source_type = var.deploy_artifact_deploy_artifact_source_deploy_artifact_source_type
 
     #Optional
-    image_uri     = "${local.ocir_docker_repository}/${local.ocir_namespace}/${var.deploy_artifact_display_name}:$${BUILDRUN_HASH}"
+    image_uri     = "${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.test_container_repository.display_name}:$${BUILDRUN_HASH}"
     image_digest  = " "
     #image_digest  = oci_devops_build_run.test_build_run.build_outputs[0].delivered_artifacts[0].items[0].delivered_artifact_hash
     repository_id = oci_devops_repository.test_repository.id
@@ -29,5 +28,5 @@ resource "oci_devops_deploy_artifact" "test_deploy_artifact" {
   project_id           = oci_devops_project.test_project.id
 
   #Optional
-  display_name = var.deploy_artifact_display_name
+  display_name = "${oci_artifacts_container_repository.test_container_repository.display_name}"
 }
