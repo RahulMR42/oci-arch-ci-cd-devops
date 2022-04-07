@@ -98,6 +98,10 @@ variable "build_pipeline_stage_display_name" {
   default = "nodejs-build-pipeline"
 }
 
+variable "build_pipeline_stage_description"{
+  default = "nodejs managed build stage"
+}
+
 variable "deliver_artifact_stage_display_name" {
   default = "deliver-artifact"
 }
